@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quest</title>
+    <link rel="stylesheet" href="page2.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Wrap the bunny in an anchor tag to make it clickable -->
+        <img src="bunnyhop2.gif" alt="Hopping Bunny" class="bunny" id="bunny" title="Drag me to the iceberg pls!" draggable="true">
+    </div>
+
+    <!-- Drop Zone for the Iceberg -->
+    <div id="drop-zone"></div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="page2script.js"></script>
+
+    <script>
+        // Make the bunny draggable
+        const bunny = document.getElementById("bunny");
+
+        bunny.addEventListener("dragstart", (event) => {
+            event.dataTransfer.setData("text/plain", event.target.id);
+        });
+
+        document.addEventListener("dragover", (event) => {
+            event.preventDefault(); // Allows dropping
+        });
+
+        document.addEventListener("drop", (event) => {
+            event.preventDefault();
+            const bunny = document.getElementById(event.dataTransfer.getData("text"));
+
+            // Get drop zone position
+            const dropZone = document.getElementById("drop-zone");
+            const dropZoneRect = dropZone.getBoundingClientRect();
+
+            // Check if bunny is dropped inside drop zone
+            if (
+                event.clientX > dropZoneRect.left &&
+                event.clientX < dropZoneRect.right &&
+                event.clientY > dropZoneRect.top &&
+                event.clientY < dropZoneRect.bottom
+            ) {
+                // Redirect to iceberg.html if bunny lands in the drop zone
+                window.location.href = "page3.html";
+            } else {
+                // Place bunny where dropped if not in drop zone
+                bunny.style.position = "absolute";
+                bunny.style.left = event.clientX - bunny.width / 2 + "px";
+                bunny.style.top = event.clientY - bunny.height / 2 + "px";
+            }
+        });
+
+        // Add a unique query string to refresh the GIF
+        bunny.src = "bunnyhop2.gif?timestamp=" + new Date().getTime();
+    </script>
+</body>
+</html>

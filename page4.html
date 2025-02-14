@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharks!!!</title>
+    <link rel="stylesheet" href="page4.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Draggable Bunny -->
+        <img src="bunny_iceberg.PNG" alt="Hopping Bunny" class="bunny" id="bunny" title="Help me to the iceberg pls!">
+
+        <!-- Drop Zone for the Sharks -->
+        <div id="drop-zone">Drop the bunny here!</div>
+
+        <!-- Moving Shark Fins -->
+        <img src="sharkfin1.gif" class="sharkfin obstacle" id="sharkfin1" alt="Shark Fin 1">
+        <img src="sharkfin2.gif" class="sharkfin obstacle" id="sharkfin2" alt="Shark Fin 2">
+        <img src="sharkfin3.gif" class="sharkfin obstacle" id="sharkfin3" alt="Shark Fin 3">
+        <img src="sharkfin4.gif" class="sharkfin obstacle" id="sharkfin4" alt="Shark Fin 4">
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="page4script.js"></script>
+
+    <script>
+        // Get the draggable bunny
+        const bunny = document.getElementById("bunny");
+
+        // Store the bunny's initial position
+        const initialX = 50; 
+        const initialY = 300;
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        // Start dragging when clicking the bunny
+        bunny.addEventListener("mousedown", (event) => {
+            isDragging = true;
+
+            // Get mouse position relative to the bunny
+            offsetX = event.clientX - bunny.getBoundingClientRect().left;
+            offsetY = event.clientY - bunny.getBoundingClientRect().top;
+
+            // Ensure bunny is positioned absolutely
+            bunny.style.position = "absolute";
+            bunny.style.zIndex = "1000"; // Bring to the front
+            bunny.style.cursor = "grabbing";
+
+            // Prevent default browser drag behavior
+            event.preventDefault();
+        });
+
+        // Move the bunny with the mouse
+        document.addEventListener("mousemove", (event) => {
+            if (!isDragging) return;
+
+            // Update bunny position dynamically
+            bunny.style.left = `${event.clientX - offsetX}px`;
+            bunny.style.top = `${event.clientY - offsetY}px`;
+
+            // Check for collisions while moving
+            checkCollision();
+        });
+
+        // Stop dragging when releasing the mouse
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            bunny.style.cursor = "grab"; // Restore cursor style
+            checkDropZone();
+        });
+
+        // Disable default drag behavior to prevent issues
+        bunny.addEventListener("dragstart", (event) => {
+            event.preventDefault();
+        });
+
+        // Prevent accidental text selection while dragging
+        document.body.style.userSelect = "none";
+
+        // Function to check if bunny is dropped in the drop zone
+        function checkDropZone() {
+            const bunnyRect = bunny.getBoundingClientRect();
+            const dropZone = document.getElementById("drop-zone");
+            const dropZoneRect = dropZone.getBoundingClientRect();
+
+            if (
+                bunnyRect.left < dropZoneRect.right &&
+                bunnyRect.right > dropZoneRect.left &&
+                bunnyRect.top < dropZoneRect.bottom &&
+                bunnyRect.bottom > dropZoneRect.top
+            ) {
+                // Redirect to sharks.html if bunny is dropped inside drop zone
+                setTimeout(() => {
+                    window.location.href = "page5.html";
+                }, 500);
+            }
+        }
+
+        // Function to check for collisions with shark fins
+        function checkCollision() {
+            const bunnyRect = bunny.getBoundingClientRect();
+            document.querySelectorAll(".sharkfin").forEach((sharkfin) => {
+                const sharkfinRect = sharkfin.getBoundingClientRect();
+
+                if (
+                    bunnyRect.left < sharkfinRect.right &&
+                    bunnyRect.right > sharkfinRect.left &&
+                    bunnyRect.top < sharkfinRect.bottom &&
+                    bunnyRect.bottom > sharkfinRect.top
+                ) {
+                    // Collision detected - Reset the bunny position
+                    setTimeout(() => {
+                        bunny.style.left = `${initialX}px`;
+                        bunny.style.top = `${initialY}px`;
+                    }, 200);
+                }
+            });
+        }
+
+        // Continuously check for collisions while dragging
+        document.addEventListener("mousemove", () => {
+            if (isDragging) {
+                checkCollision();
+            }
+        });
+    </script>
+</body>
+</html>

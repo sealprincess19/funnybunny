@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almost there</title>
+    <link rel="stylesheet" href="page5.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Bunny Image -->
+        <img src="bunny_iceberg.PNG" alt="Bunny" class="bunny" id="bunny">
+
+        <!-- Drop Zone -->
+        <div id="drop-zone">Drop Here</div>
+    </div>
+
+    <script>
+        // Get bunny and dropzone elements
+        const bunny = document.getElementById("bunny");
+        const dropZone = document.getElementById("drop-zone");
+
+        let bunnyPosition = 50; // Initial bunny position
+        const moveDistance = 5; // Distance moved per spacebar press
+        let spacePressed = false; // Prevents continuous movement
+
+        // Event listener for spacebar key press (only fires once per press)
+        document.addEventListener("keydown", (event) => {
+            if (event.code === "Space" && !spacePressed) {
+                event.preventDefault(); // Prevent scrolling
+                spacePressed = true; // Mark spacebar as pressed
+
+                // Move bunny forward
+                bunnyPosition += moveDistance;
+                bunny.style.left = `${bunnyPosition}px`;
+
+                // Check if bunny has reached the drop zone
+                const bunnyRect = bunny.getBoundingClientRect();
+                const dropZoneRect = dropZone.getBoundingClientRect();
+
+                if (
+                    bunnyRect.left < dropZoneRect.right &&
+                    bunnyRect.right > dropZoneRect.left &&
+                    bunnyRect.top < dropZoneRect.bottom &&
+                    bunnyRect.bottom > dropZoneRect.top
+                ) {
+                    // Redirect to sharks.html after reaching drop zone
+                    setTimeout(() => {
+                        window.location.href = "page6.html";
+                    }, 500);
+                }
+            }
+        });
+
+        // Event listener for releasing the spacebar
+        document.addEventListener("keyup", (event) => {
+            if (event.code === "Space") {
+                spacePressed = false; // Allow spacebar to be pressed again
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Icebergs</title>
+    <link rel="stylesheet" href="page3.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Draggable Bunny -->
+        <img src="bunny_iceberg.PNG" alt="Hopping Bunny" class="bunny" id="bunny" title="Help me to the iceberg pls!">
+
+        <!-- Drop Zone for the Sharks -->
+        <div id="drop-zone">Drop the bunny here!</div>
+
+        <!-- Additional Iceberg PNGs -->
+        <img src="berg1.PNG" class="obstacle" id="berg1" alt="Iceberg 1">
+        <img src="berg2.PNG" class="obstacle" id="berg2" alt="Iceberg 2">
+        <img src="berg3.PNG" class="obstacle" id="berg3" alt="Iceberg 3">
+        <img src="berg4.PNG" class="obstacle" id="berg4" alt="Iceberg 4">
+        <img src="berg5.PNG" class="obstacle" id="berg5" alt="Iceberg 5">
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="page3script.js"></script>
+
+    <script>
+        // Get the draggable bunny
+        const bunny = document.getElementById("bunny");
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        // Start dragging when clicking the bunny
+        bunny.addEventListener("mousedown", (event) => {
+            isDragging = true;
+
+            // Get mouse position relative to the bunny
+            offsetX = event.clientX - bunny.getBoundingClientRect().left;
+            offsetY = event.clientY - bunny.getBoundingClientRect().top;
+
+            // Apply styling to ensure visibility
+            bunny.style.position = "absolute";
+            bunny.style.zIndex = "1000"; // Bring to the front
+            bunny.style.opacity = "1"; // Ensure it's visible
+
+            // Prevent default drag behavior
+            event.preventDefault();
+        });
+
+        // Move the bunny with the mouse
+        document.addEventListener("mousemove", (event) => {
+            if (!isDragging) return;
+
+            // Update bunny position
+            bunny.style.left = `${event.clientX - offsetX}px`;
+            bunny.style.top = `${event.clientY - offsetY}px`;
+        });
+
+        // Stop dragging when releasing the mouse
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+
+            // Check if dropped in the drop zone
+            checkDropZone();
+        });
+
+        // Disable default drag behavior to prevent disappearing issues
+        bunny.addEventListener("dragstart", (event) => {
+            event.preventDefault();
+        });
+
+        // Prevent accidental text selection while dragging
+        document.body.style.userSelect = "none";
+
+        // Function to check if bunny is dropped in the drop zone
+        function checkDropZone() {
+            const bunnyRect = bunny.getBoundingClientRect();
+            const dropZone = document.getElementById("drop-zone");
+            const dropZoneRect = dropZone.getBoundingClientRect();
+
+            if (
+                bunnyRect.left < dropZoneRect.right &&
+                bunnyRect.right > dropZoneRect.left &&
+                bunnyRect.top < dropZoneRect.bottom &&
+                bunnyRect.bottom > dropZoneRect.top
+            ) {
+                // Redirect to sharks.html if bunny is dropped inside drop zone
+                setTimeout(() => {
+                    window.location.href = "page4.html";
+                }, 500); // Small delay for effect
+            }
+        }
+
+        // Function to check for collisions with icebergs
+        function checkCollision() {
+            const bunnyRect = bunny.getBoundingClientRect();
+            document.querySelectorAll(".obstacle").forEach((obstacle) => {
+                const obstacleRect = obstacle.getBoundingClientRect();
+
+                if (
+                    bunnyRect.left < obstacleRect.right &&
+                    bunnyRect.right > obstacleRect.left &&
+                    bunnyRect.top < obstacleRect.bottom &&
+                    bunnyRect.bottom > obstacleRect.top
+                ) {
+                    // Collision detected - Reset the bunny position
+                    setTimeout(() => {
+                        bunny.style.left = "50px"; // Reset to original position
+                        bunny.style.top = "300px"; // Reset to original position
+                    }, 300);
+                }
+            });
+        }
+
+        // Continuously check for collisions while dragging
+        document.addEventListener("mousemove", () => {
+            if (isDragging) {
+                checkCollision();
+            }
+        });
+
+        // Add a unique query string to refresh the GIF
+        bunny.src = "bunny_iceberg.png?timestamp=" + new Date().getTime();
+    </script>
+</body>
+</html>

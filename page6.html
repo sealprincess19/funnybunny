@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunited</title>
+    <link rel="stylesheet" href="page6.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Bunny (Slides in from the left) -->
+        <img src="bunnyhop_snow.gif" alt="Hopping Bunny" class="bunny" id="bunny">
+
+        <!-- Seal (Clickable & Hidden Initially) -->
+        <a href="funnybunny.html" id="seal-link">
+            <img src="seal.png" alt="Surprised Seal" class="seal" id="seal" title="Hey there cutie">
+        </a>
+    </div>
+
+    <script>
+        // Prevent GIF caching
+        const bunny = document.getElementById("bunny");
+        bunny.src = "bunnyhop_snow.gif?timestamp=" + new Date().getTime();
+
+        // Make bunny slide into position after page load
+        setTimeout(() => {
+            bunny.classList.add("bunny-slide-in");
+        }, 500); // Slight delay so animation is visible
+
+        // Delay the seal's appearance by 6.5 seconds
+        setTimeout(() => {
+            document.getElementById("seal").classList.add("slide-in");
+        }, 6500);
+    </script>
+</body>
+</html>

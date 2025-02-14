@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'PixelColeco';
+    src: url('PixelColeco-4vJW.ttf') format('truetype');
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fcc5cf; /* Pink background */
+    color: white; /* White text */
+    font-family: 'PixelColeco', sans-serif;
+    text-align: center;
+}
+
+.container {
+    max-width: 80%;
+    padding: 20px;
+    white-space: pre-wrap; /* Keeps text formatting */
+    font-size: 20px;
+    line-height: 1.6;
+}

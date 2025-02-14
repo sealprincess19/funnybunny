@@ -1,0 +1,123 @@
+/* --- Original Code (Unchanged) --- */
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('iceberg_bg.png'); /* Set the image */
+    background-size: cover; /* Ensure the image covers the entire screen */
+    background-repeat: no-repeat; /* Prevent tiling */
+    background-position: center; /* Center the image */
+    font-family: Arial, sans-serif; /* Optional: Set a default font */
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bunny {
+    position: absolute;
+    bottom: 42%; /* Adjust vertical position */
+    left: 50px;
+    width: 300px; /* Increase size of the bunny */
+}
+
+/* --- New CSS Additions --- */
+
+/* Drop Zone for Iceberg */
+#drop-zone {
+    position: absolute;
+    bottom: 290px; /* Adjust position */
+    left: 87%; /* Position towards the right */
+    transform: translateX(-50%);
+    width: 260px;
+    height: 130px;
+    background-color: rgba(0, 0, 255, 0); /* Light blue iceberg effect */
+    text-align: center;
+    line-height: 120px;
+    font-weight: bold;
+    color: rgba(0, 0, 255, 0);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0);
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Drop Zone Hover Effect */
+#drop-zone:hover {
+    background-color: rgba(0, 0, 255, 0);
+    cursor: pointer;
+}
+
+/* Floating Text for Instructions */
+.instructions {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Draggable Bunny Shadow Effect */
+.bunny.dragging {
+    opacity: 1;
+    filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+/* Iceberg Animation After Bunny is Dropped */
+@keyframes icebergShake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: icebergShake 0.5s ease-in-out;
+}
+
+/* --- New CSS for Additional Icebergs --- */
+
+/* Positioning Icebergs */
+.obstacle {
+    position: absolute;
+    width: 300px; /* Adjust size as needed */
+    height: auto;
+}
+
+/* Position Each Iceberg */
+#berg1 {
+    top: 8%;
+    left: 15%;
+}
+
+#berg2 {
+    top: 20%;
+    left: 40%;
+}
+
+#berg3 {
+    bottom: 55%;
+    right: 10%;
+}
+
+#berg4 {
+    bottom: 55px;
+    left: 67%;
+}
+
+#berg5 {
+    top: 53%;
+    left: 20%;
+}
+
+/* Iceberg Collision Effect */
+.obstacle.touched {
+    filter: brightness(50%);
+    transition: filter 0.3s ease-in-out;
+}

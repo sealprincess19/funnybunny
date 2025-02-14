@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><3</title>
+    <link rel="stylesheet" href="typewriter.css">
+</head>
+<body>
+    <div class="container">
+        <p id="text"></p>
+    </div>
+
+    <!-- Hidden Audio Player -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="margaret.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const message = `./././
+        // 
+        // I’m not very good at writing out my feelings,/ so forgive me if this isn’t the most amazing thing you’ve ever read/—haha./
+I feel like I might be too embarrassed to say all these things to you out loud,/ so I thought I’d write them down./
+Chelsea,/ even though I’ve only known you for a short while,/ I can't describe how much happiness you’ve added to my life./ I feel like you stole my heart the moment I first heard you laugh,/ the moment you first smiled at me,/ the moment you first said hi./ 
+Every new thing I learn about you just makes me want to know more/—even the small things,/ like the kindness you show to your siblings, your friends, and your mamaaa,/ or the stupid things that you find so hilarious,/ like Randy and his shark jokes./ You brighten my day just by being you, with your jokes and corny compliments. 
+Being with you makes me want to be a better version of myself/—someone who can make you cry with laughter and support you no matter what comes our way, the same way you have done for me./ 
+You treat me with such care and compassion that I sometimes don't know what I’ve done to deserve someone as genuine as you./ You are incredibly beautiful, inside and out./ My beautiful angel./
+My Chelsea./
+
+Whatever hopes and dreams you have, I want to be the one to stand beside you and help make them happen—or help you back up when you fall./ Even if I have to step back to let you spread your wings, I’d be glad to watch you shine./ Seeing you happy makes my chest tighten in a way I can’t describe, and I know I’d do anything to hold onto that feeling./ I’d do anything for you.//
+I love you, Chels.`;
+
+        let index = 0;
+        function typeWriter() {
+            if (index < message.length) {
+                let char = message.charAt(index);
+                if (char === "/") {
+                    index++; // Skip the slash
+                    setTimeout(typeWriter, 700); // Longer pause on slash
+                } else {
+                    document.getElementById("text").innerHTML += char;
+                    index++;
+                    setTimeout(typeWriter, 58); // Normal typing speed
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            typeWriter();
+
+            // Try to autoplay music
+            const music = document.getElementById("backgroundMusic");
+            music.volume = 0.2; // Adjust volume as needed
+            music.play().catch(() => {
+                console.log("Autoplay prevented. User interaction required.");
+            });
+        });
+    </script>
+</body>
+</html>

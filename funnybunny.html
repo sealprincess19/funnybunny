@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Funny Bunny</title>
+    <style>
+        /* Make the video take up the entire screen without cropping */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Prevent scrolling */
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain; /* Ensure the full video fits without cropping */
+            background-color: black;
+        }
+
+        /* Play Button (only appears if autoplay fails) */
+        #playButton, #endButton {
+            position: absolute;
+            bottom: 10%; /* Position near the bottom */
+            width: 200px;
+            height: 50px;
+            background: white;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: none; /* Hidden unless needed */
+        }
+
+        #playButton {
+            bottom: 20%; /* Higher placement for autoplay fix button */
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Player -->
+    <video id="video" autoplay muted playsinline>
+        <source src="funnybunny.mp4?nocache=" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Play Button (if needed) -->
+    <button id="playButton">4 u baby ;)</button>
+
+    <!-- End Button (appears when video ends) -->
+    <button id="endButton" onclick="window.location.href='iloveyou.html'">or am I</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const video = document.getElementById("video");
+            const playButton = document.getElementById("playButton");
+            const endButton = document.getElementById("endButton");
+
+            // Ensure the video reloads properly every time
+            video.src = "funnybunny.mp4?nocache=" + new Date().getTime();
+
+            // Try autoplay
+            function playVideo() {
+                video.muted = false; // Unmute video if needed
+                video.play().catch(error => {
+                    console.log("Autoplay prevented. Showing play button.");
+                    playButton.style.display = "block"; // Show play button if autoplay fails
+                });
+            }
+
+            playVideo();
+
+            // Enter fullscreen automatically if possible
+            function enterFullscreen() {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen(); // Safari
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen(); // IE/Edge
+                }
+            }
+
+            // Try fullscreen after 500ms
+            setTimeout(() => {
+                enterFullscreen();
+            }, 500);
+
+            // If autoplay fails, allow manual play
+            playButton.addEventListener("click", () => {
+                playButton.style.display = "none"; // Hide button after click
+                video.play();
+            });
+
+            // Show "or am I" button when video ends
+            video.addEventListener("ended", () => {
+                console.log("Video finished playing");
+                video.pause();
+                endButton.style.display = "block"; // Show the end button
+            });
+        });
+    </script>
+</body>
+</html>

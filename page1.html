@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi :)</title>
+    <link rel="stylesheet" href="bunny.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Wrap the bunny in an anchor tag to make it clickable -->
+        <a href="page2.html" id="bunny-link">
+            <img src="bunnyhop.gif" alt="Hopping Bunny" class="bunny" id="bunny" title="Click me!">
+        </a>
+    </div>
+    <script>
+        // Add a unique query string to the GIF's URL to prevent caching
+        const bunny = document.getElementById("bunny");
+        bunny.src = "bunnyhop.gif?timestamp=" + new Date().getTime();
+    </script>
+</body>
+</html>
