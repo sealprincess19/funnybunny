@@ -42,4 +42,36 @@ body {
     }
 }
 
+/* Import the PixelColeco font */
+@font-face {
+    font-family: 'PixelColeco';
+    src: url('PixelColeco-4vJW.ttf') format('truetype');
+}
+
+/* Seal Text Styling */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.bunny-text {
+    position: absolute;
+    bottom: 65%; /* Place above the seal */
+    right: 600px;
+    transform: translateX(-50%);
+    font-family: 'PixelColeco', sans-serif;
+    font-size: 2vw; /* Responsive size */
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1.5s ease-in-out forwards;
+    animation-delay: 9s; /* Delays fade-in by 6 seconds */
+}
+
+
+
 
