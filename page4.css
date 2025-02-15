@@ -1,109 +1,169 @@
-/* --- Original Code (Unchanged) --- */
+/* --- General Reset --- */
 body {
     margin: 0;
     height: 100vh;
     background-image: url('sharks_bg.png'); /* Updated background */
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed; /* Prevents scrolling issues */
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling */
 }
 
 .container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
-/* Drop Zone for Sharks */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to move to the next line if needed */
+    justify-content: space-between;
+}
+
+.flex-item {
+    flex: 1 1 20vw; /* Responsive item sizing */
+    margin: 1vw;
+}
+
+/* --- Drop Zone (Sharks) --- */
 #drop-zone {
     position: absolute;
-    bottom: 290px;
-    left: 87%;
+    bottom: 10vh; /* Adjust dynamically */
+    left: 80vw; /* Adjusted for responsiveness */
     transform: translateX(-50%);
-    width: 360px;
-    height: 230px;
-    background-color: rgba(0, 0, 0, 0);
+    width: 18vw; /* Scales dynamically */
+    max-width: 360px;
+    height: 12vh;
+    max-height: 230px;
+    background-color: rgba(0, 0, 0, 0); /* Initially invisible */
     text-align: center;
     line-height: 120px;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0)
-
+    color: rgba(0, 0, 0, 0);
 }
 
-/* Floating Text for Instructions */
+/* --- Floating Instructions --- */
 .instructions {
     position: absolute;
-    top: 20px;
+    top: 5vh;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 20px;
+    font-size: 2vw; /* Scale with screen width */
     font-weight: bold;
     color: white;
     background: rgba(0, 0, 0, 0);
-    padding: 10px 20px;
+    padding: 1vh 2vw;
     border-radius: 10px;
     text-align: center;
 }
 
-/* Make Bunny Clickable & Draggable */
+/* --- Make Bunny Clickable & Draggable --- */
 .bunny {
     position: absolute;
-    width: 300px;
+    width: 12vw; /* Scale based on screen size */
+    max-width: 150px; /* Prevent excessive scaling */
     cursor: grab;
-    top: 300px;
-    left: 50px;
+    top: 40vh;
+    left: 5vw;
 }
 
-/* Moving Shark Fin Animation */
+/* --- Moving Shark Fin Animation --- */
 .sharkfin {
     position: absolute;
-    width: 200px;
+    width: 10vw; /* Make fins responsive */
+    max-width: 200px;
     height: auto;
 }
 
-/* Positioning and Movement of Shark Fins */
+/* --- Positioning and Movement of Shark Fins --- */
 #sharkfin1 {
-    top: 10%;
-    right: 20vw; /* Starts off-screen to the left */
+    top: 10vh;
+    right: 20vw;
     animation: moveShark1 6s linear infinite alternate;
 }
 
 #sharkfin2 {
-    top: 30%;
-    left: 20vw; /* Starts 10vw from the left */
+    top: 30vh;
+    left: 20vw;
     animation: moveShark2 6s linear infinite alternate;
 }
 
 #sharkfin3 {
-    bottom: 20%;
-    right: 20vw; /* Starts off-screen to the right */
+    bottom: 20vh;
+    right: 20vw;
     animation: moveShark3 6s linear infinite alternate;
 }
 
 #sharkfin4 {
-    bottom: 50px;
-    left: 20vw; /* Starts 20vw from the right */
+    bottom: 10vh;
+    left: 20vw;
     animation: moveShark4 7s linear infinite alternate;
 }
 
-/* Custom Animations for Each Shark Fin */
+/* --- Custom Animations for Each Shark Fin --- */
 @keyframes moveShark1 {
-    0% { transform: translateX(0); } /* Starts at left (-20vw) */
-    100% { transform: translateX(-50vw); } /* Moves 60vw to the right */
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-40vw); } /* Adjusted for responsiveness */
 }
 
 @keyframes moveShark2 {
-    0% { transform: translateX(0); } /* Starts at left (10vw) */
-    100% { transform: translateX(50vw); } /* Moves 50vw to the right */
+    0% { transform: translateX(0); }
+    100% { transform: translateX(40vw); }
 }
 
 @keyframes moveShark3 {
-    0% { transform: translateX(0); } /* Starts at right (-30vw) */
-    100% { transform: translateX(-50vw); } /* Moves 70vw to the left */
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-40vw); }
 }
 
 @keyframes moveShark4 {
-    0% { transform: translateX(0); } /* Starts at right (20vw) */
-    100% { transform: translateX(50vw); } /* Moves 50vw to the left */
+    0% { transform: translateX(0); }
+    100% { transform: translateX(40vw); }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .bunny {
+        width: 20vw;
+        top: 35vh;
+    }
+
+    #drop-zone {
+        width: 20vw;
+        bottom: 8vh;
+    }
+
+    .instructions {
+        font-size: 3vw;
+    }
+
+    .sharkfin {
+        width: 14vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .bunny {
+        width: 25vw;
+        top: 30vh;
+    }
+
+    #drop-zone {
+        width: 22vw;
+        bottom: 5vh;
+    }
+
+    .instructions {
+        font-size: 4vw;
+    }
+
+    .sharkfin {
+        width: 16vw;
+    }
 }

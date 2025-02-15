@@ -1,38 +1,56 @@
-/* --- Original Code (Unchanged) --- */
+/* --- General Reset --- */
 body {
     margin: 0;
     height: 100vh;
     background-image: url('iceberg_bg.png'); /* Set the image */
-    background-size: cover; /* Ensure the image covers the entire screen */
+    background-size: contain; /* Ensure the image covers the entire screen */
     background-repeat: no-repeat; /* Prevent tiling */
     background-position: center; /* Center the image */
+    background-attachment: fixed; /* Prevents scrolling issues */
     font-family: Arial, sans-serif; /* Optional: Set a default font */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling if content overflows */
 }
 
 .container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
+.flex-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to move to the next line if needed */
+    justify-content: space-between;
+}
+
+.flex-item {
+    flex: 1 1 20vw; /* Responsive size */
+    margin: 1vw;
+}
+
+/* --- Bunny --- */
 .bunny {
     position: absolute;
-    bottom: 42%; /* Adjust vertical position */
-    left: 50px;
-    width: 300px; /* Increase size of the bunny */
+    bottom: 40vh; /* Use vh for dynamic placement */
+    left: 5vw; /* Position relatively */
+    width: 12vw; /* Scale based on screen size */
+    max-width: 150px; /* Prevent excessive scaling */
 }
 
-/* --- New CSS Additions --- */
-
-/* Drop Zone for Iceberg */
+/* --- Drop Zone (Iceberg) --- */
 #drop-zone {
     position: absolute;
-    bottom: 290px; /* Adjust position */
-    left: 87%; /* Position towards the right */
+    bottom: 12vh; /* Adjust dynamically */
+    left: 80vw; /* Position towards the right */
     transform: translateX(-50%);
-    width: 260px;
-    height: 130px;
-    background-color: rgba(0, 0, 255, 0); /* Light blue iceberg effect */
+    width: 14vw; /* Scale dynamically */
+    max-width: 260px;
+    height: 10vh;
+    max-height: 130px;
+    background-color: rgba(0, 0, 255, 0); /* Initially invisible */
     text-align: center;
     line-height: 120px;
     font-weight: bold;
@@ -41,34 +59,33 @@ body {
     transition: background-color 0.3s ease-in-out;
 }
 
-/* Drop Zone Hover Effect */
 #drop-zone:hover {
     background-color: rgba(0, 0, 255, 0);
     cursor: pointer;
 }
 
-/* Floating Text for Instructions */
+/* --- Floating Instructions --- */
 .instructions {
     position: absolute;
-    top: 20px;
+    top: 5vh;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 20px;
+    font-size: 2vw; /* Scale with screen width */
     font-weight: bold;
     color: rgba(0, 0, 0, 0);
     background: rgba(0, 0, 0, 0);
-    padding: 10px 20px;
+    padding: 1vh 2vw;
     border-radius: 10px;
     text-align: center;
 }
 
-/* Draggable Bunny Shadow Effect */
+/* --- Draggable Bunny Shadow Effect --- */
 .bunny.dragging {
     opacity: 1;
     filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.5));
 }
 
-/* Iceberg Animation After Bunny is Dropped */
+/* --- Iceberg Animation --- */
 @keyframes icebergShake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
@@ -81,43 +98,83 @@ body {
     animation: icebergShake 0.5s ease-in-out;
 }
 
-/* --- New CSS for Additional Icebergs --- */
-
-/* Positioning Icebergs */
+/* --- Additional Icebergs (Obstacles) --- */
 .obstacle {
     position: absolute;
-    width: 300px; /* Adjust size as needed */
+    width: 10vw; /* Make obstacles responsive */
+    max-width: 300px;
     height: auto;
 }
 
 /* Position Each Iceberg */
 #berg1 {
-    top: 8%;
-    left: 15%;
+    top: 8vh;
+    left: 15vw;
 }
 
 #berg2 {
-    top: 20%;
-    left: 40%;
+    top: 20vh;
+    left: 40vw;
 }
 
 #berg3 {
-    bottom: 55%;
-    right: 10%;
+    bottom: 50vh;
+    right: 10vw;
 }
 
 #berg4 {
-    bottom: 55px;
-    left: 67%;
+    bottom: 10vh;
+    left: 67vw;
 }
 
 #berg5 {
-    top: 53%;
-    left: 20%;
+    top: 55vh;
+    left: 20vw;
 }
 
 /* Iceberg Collision Effect */
 .obstacle.touched {
     filter: brightness(50%);
     transition: filter 0.3s ease-in-out;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .bunny {
+        width: 20vw; /* Adjust bunny size */
+        bottom: 35vh;
+    }
+
+    #drop-zone {
+        width: 18vw;
+        bottom: 10vh;
+    }
+
+    .instructions {
+        font-size: 3vw;
+    }
+
+    .obstacle {
+        width: 14vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .bunny {
+        width: 25vw;
+        bottom: 30vh;
+    }
+
+    #drop-zone {
+        width: 20vw;
+        bottom: 8vh;
+    }
+
+    .instructions {
+        font-size: 4vw;
+    }
+
+    .obstacle {
+        width: 16vw;
+    }
 }
