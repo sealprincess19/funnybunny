@@ -35,10 +35,10 @@ body {
 #drop-zone {
     position: absolute;
     bottom: 10vh; /* Adjust dynamically */
-    left: 80vw; /* Adjusted for responsiveness */
+    left: calc(100vw - 12vw - 5vw); /* Ensures the drop zone is at the right side */
     transform: translateX(-50%);
-    width: 18vw; /* Scales dynamically */
-    max-width: 360px;
+    width: 12vw; /* Scales dynamically */
+    max-width: 150px;
     height: 12vh;
     max-height: 230px;
     background-color: rgba(0, 0, 0, 0); /* Initially invisible */
@@ -67,7 +67,7 @@ body {
 .bunny {
     position: absolute;
     width: 12vw; /* Scale based on screen size */
-    max-width: 150px; /* Prevent excessive scaling */
+    max-width: 250px; /* Prevent excessive scaling */
     cursor: grab;
     top: 40vh;
     left: 5vw;
@@ -77,7 +77,7 @@ body {
 .sharkfin {
     position: absolute;
     width: 10vw; /* Make fins responsive */
-    max-width: 200px;
+    max-width: 300px;
     height: auto;
 }
 
@@ -135,6 +135,7 @@ body {
     }
 
     #drop-zone {
+        left: calc(100vw - 20vw - 5vw); /* Adjusted for larger bunny */
         width: 20vw;
         bottom: 8vh;
     }
@@ -155,6 +156,7 @@ body {
     }
 
     #drop-zone {
+        left: calc(100vw - 25vw - 5vw); /* Adjusted for even larger bunny */
         width: 22vw;
         bottom: 5vh;
     }
