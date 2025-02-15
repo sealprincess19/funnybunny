@@ -3,7 +3,7 @@ body {
     margin: 0;
     height: 100vh;
     background-image: url('iceberg_bg.png'); /* Set the image */
-    background-size: contain; /* Ensure the image covers the entire screen */
+    background-size: cover; /* Ensure the image covers the entire screen */
     background-repeat: no-repeat; /* Prevent tiling */
     background-position: center; /* Center the image */
     font-family: Arial, sans-serif; /* Optional: Set a default font */
@@ -120,4 +120,26 @@ body {
 .obstacle.touched {
     filter: brightness(50%);
     transition: filter 0.3s ease-in-out;
+}
+
+/* Import the PixelColeco font */
+@font-face {
+    font-family: 'PixelColeco';
+    src: url('PixelColeco-4vJW.ttf') format('truetype');
+}
+
+/* Static Text Styling */
+.game-text {
+    position: absolute;
+    top: 2vh; /* Adjust position from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'PixelColeco', sans-serif;
+    font-size: 2vw; /* Responsive font size */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
 }

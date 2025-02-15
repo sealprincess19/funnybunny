@@ -2,8 +2,8 @@
 body {
     margin: 0;
     height: 100vh;
-    background-image: url('sharks_bg.png'); /* Updated background */
-    background-size: contain;
+    background-image: url('iceberg_bg.png'); /* Updated background */
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     font-family: Arial, sans-serif;
@@ -106,4 +106,26 @@ body {
 @keyframes moveShark4 {
     0% { transform: translateX(0); } /* Starts at right (20vw) */
     100% { transform: translateX(50vw); } /* Moves 50vw to the left */
+}
+
+/* Import the PixelColeco font */
+@font-face {
+    font-family: 'PixelColeco';
+    src: url('PixelColeco-4vJW.ttf') format('truetype');
+}
+
+/* Static Text Styling */
+.game-text {
+    position: absolute;
+    top: 2vh; /* Adjust position from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'PixelColeco', sans-serif;
+    font-size: 2vw; /* Responsive font size */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
 }
