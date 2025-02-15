@@ -34,7 +34,7 @@ body {
 /* --- Drop Zone (Sharks) --- */
 #drop-zone {
     position: absolute;
-    bottom: 10vh; /* Adjust dynamically */
+    bottom: 50vh; /* Adjust dynamically */
     left: calc(100vw - 12vw - 5vw); /* Ensures the drop zone is at the right side */
     transform: translateX(-50%);
     width: 12vw; /* Scales dynamically */
